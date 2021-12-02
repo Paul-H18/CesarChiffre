@@ -15,6 +15,8 @@ public class Window {
         frame.setTitle("Cäsar Chiffre");
         frame.setLayout(null);
 
+
+
         frame.add(ecryptButton);
         frame.add(decryptButton);
         frame.add(ecryptField);

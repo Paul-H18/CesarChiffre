@@ -45,7 +45,7 @@ public class Alphabeth {
     }
 
     public char getChar(int number) {
-        return this.alpha[number%36];
+        return this.alpha[number];
     }
 
     public int getIndexFromChar(char c) {

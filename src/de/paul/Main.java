@@ -1,18 +1,16 @@
 package de.paul;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
 
     static Scanner sc = new Scanner(System.in);
     static Scanner sc2 = new Scanner(System.in);
-    static String str, str1 = "";
+    static String str;
 
     static char[] text, text2, ecryptedCharText, decryptedCharText;
-    static String ecryptedText = "", decryptedText = "", c;
+    static String ecryptedText = "", decryptedText = "";
     static int key;
-    static boolean choice;
 
     static Alphabeth alpha = new Alphabeth();
 
@@ -105,14 +103,14 @@ public class Main {
      * c mod 36 = Platz des dechifrriertem chars im Aplphabeth
      * @param a Platz des chiffrierten chars im Alphabeth
      * @param mod Länge des Alphabeths
-     * @return Platz des dechifrriertem chars im Aplphabeth
+     * @return Platz des dechiffriertem chars im Alphabeth
      */
     public static int getDecryptedInt(int a, int mod) {
         int c = a - key;
         if(c >= 0) {
             return c % mod;
         } else {
-            int tmp = 36 + c;
+            int tmp = mod + c;
             return tmp % mod;
         }
     }
