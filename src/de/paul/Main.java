@@ -67,6 +67,7 @@ public class Main {
             str = str.replaceAll("\\s", "");
 
             text2 = str.toCharArray();
+            decryptedCharText = str.toCharArray();
 
             System.out.print("Geben Sie den Schlüssel als Zahl ein: ");
             key = sc2.nextInt();
@@ -74,7 +75,7 @@ public class Main {
             sc2.reset();
 
             for (int i = 0; i < text2.length; i++) {
-                decryptedCharText[i] = alpha.getChar(getDecryptedInt(key));
+                decryptedCharText[i] = alpha.getChar(getDecryptedInt(alpha.getIndexFromChar(decryptedCharText[i]), alpha.getLength()));
             }
 
             for (int i = 0; i < decryptedCharText.length; i++) {
@@ -95,9 +96,9 @@ public class Main {
         return c % mod;
     }
 
-    public static int getDecryptedInt(int mod) {
-        int c = mod - key;
-        return c % key;
+    public static int getDecryptedInt(int a, int mod) {
+        int c = a - key;
+        return c % mod;
     }
 
 }
