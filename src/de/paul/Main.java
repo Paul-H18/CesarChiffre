@@ -21,7 +21,6 @@ public class Main {
 
             System.out.print("Geben Sie die zu chiffrierende Nachricht ein: ");
             str = sc.nextLine();
-            System.out.println("\n");
 
             str = str.toLowerCase();
 
@@ -34,14 +33,13 @@ public class Main {
 
             System.out.print("Geben Sie den Schlüssel als Zahl ein: ");
             key = sc.nextInt();
-            System.out.println("\n");
             sc.reset();
 
 
             ecryptedCharText = new char[text.length];
 
             for (int i = 0; i < text.length; i++) {
-                ecryptedCharText[i] = alpha.getChar(getEcryptedInt(alpha.getIndexFromChar(text[i]), key, alpha.getLength()));
+                ecryptedCharText[i] = alpha.getChar(getEcryptedInt(alpha.getIndexFromChar(text[i]), alpha.getLength()));
             }
 
             for (int i = 0; i < ecryptedCharText.length; i++) {
@@ -49,7 +47,8 @@ public class Main {
             }
 
 
-            System.out.println(ecryptedText);
+            System.out.println("Chiffrierte Nachricht: " + ecryptedText);
+            System.out.print("\n");
 
             str = "";
 
@@ -57,8 +56,6 @@ public class Main {
             System.out.print("Geben die sie zu dechiffrierende Nachricht ein: ");
 
             str = sc2.nextLine();
-
-            System.out.println("\n");
 
             sc2.reset();
 
@@ -71,7 +68,6 @@ public class Main {
 
             System.out.print("Geben Sie den Schlüssel als Zahl ein: ");
             key = sc2.nextInt();
-            System.out.println("\n");
             sc2.reset();
 
             for (int i = 0; i < text2.length; i++) {
@@ -82,23 +78,43 @@ public class Main {
                 decryptedText = decryptedText + decryptedCharText[i];
             }
 
-            System.out.println(decryptedCharText);
+            System.out.println("Dechiffrierte Nachricht: " + decryptedText);
+            System.out.print("\n");
 
         sc.close();
         sc2.close();
 
     }
 
-    // c + schlüssel = a mod 36
 
-    public static int getEcryptedInt(int m, int a, int mod) {
-        int c = m + a;
+    /**
+     * Platz des klarem chars im Alphabeth + Verschiebung = a
+     * a mod 36 = Platz des chiffriertem chars im Alphabeth
+     * @param m Platz des klarem chars im Alphabeth
+     * @param mod Länge des Alphabeths
+     * @return Platz des chiffriertem chars im Alphabeth
+     */
+    public static int getEcryptedInt(int m, int mod) {
+        int c = m + key;
         return c % mod;
     }
 
+
+    /**
+     * Platz des chiffrierten chars im Alphabeth - Verschiebung = c
+     * c mod 36 = Platz des dechifrriertem chars im Aplphabeth
+     * @param a Platz des chiffrierten chars im Alphabeth
+     * @param mod Länge des Alphabeths
+     * @return Platz des dechifrriertem chars im Aplphabeth
+     */
     public static int getDecryptedInt(int a, int mod) {
         int c = a - key;
-        return c % mod;
+        if(c >= 0) {
+            return c % mod;
+        } else {
+            int tmp = 36 + c;
+            return tmp % mod;
+        }
     }
 
 }
